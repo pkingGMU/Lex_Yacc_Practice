@@ -444,7 +444,7 @@ char *yytext;
 #line 2 "lexer.lex"
 
 #include <stdio.h>
-
+#include "parser.tab.h"
 #line 448 "lex.yy.c"
 #line 449 "lex.yy.c"
 
@@ -1752,7 +1752,4 @@ void yyfree (void * ptr )
 #line 13 "lexer.lex"
 
 
-int main(void){
-    yylex();
- }
 
