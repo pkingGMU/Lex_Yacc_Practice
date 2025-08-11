@@ -6,10 +6,10 @@
 
 %%
 
-[0-9]+          { yylval = atoi(yytext); return INTEGER }
-[-+]            { return *yytext;}
+[0-9]+          { yylval = atoi(yytext); return INTEGER; }
+[-+\n]            { return *yytext;}
 [ \t\n]         {;}
-.               { yyerror("invalid character"); }
+.               { printf("invalid character"); }
 
 %%
 
