@@ -3,22 +3,34 @@
 #include <stdio.h>
 int yylex();
 int yyerror(const char *s);
+int sym[26];
 
 %}
 
 %token INTEGER
+%token VARIABLE
 
 %%
 
 program:
-program expr '\n'  { printf("%d\n", $2); }
+program statement '\n'
 |
 ;
 
+statement:
+expr                  { printf("%d\n", $1); }
+| VARIABLE '=' expr    { sym[$1] = $3; }
+;
+
 expr:
-INTEGER            { $$ = $1; }
+INTEGER
+| VARIABLE         { $$ = sym[$1]; }
 | expr '+' expr    { $$ = $1 + $3; }
 | expr '-' expr    { $$ = $1 - $3; }
+| expr '*' expr    { $$ = $1 * $3; }
+| expr '/' expr    { $$ = $1 / $3; }
+| '(' expr ')'     { $$ = $2; }
+
 ;
 
 %%
